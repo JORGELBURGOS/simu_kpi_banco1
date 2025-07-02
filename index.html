@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulador de KPIs - Banco Ejemplo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            color: #002B5B;
+        }
+        header {
+            background-color: #002B5B;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1.5rem;
+            justify-content: center;
+            background-color: #e3eaf2;
+        }
+        .filters label {
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #002B5B;
+        }
+        select {
+            padding: 0.5rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            background-color: white;
+            font-size: 1rem;
+        }
+        .cards {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 1rem 1.5rem;
+            width: 220px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            margin-top: 0;
+            font-size: 1rem;
+            color: #1976D2;
+        }
+        .card p {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0 0;
+        }
+        .table-container {
+            padding: 2rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #1976D2;
+            color: white;
+        }
+        td.indicador:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            background: #333;
+            color: #fff;
+            padding: 0.6rem;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            font-size: 0.85rem;
+            z-index: 10;
+        }
+        @media (max-width: 768px) {
+            .cards, .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Simulador de KPIs - Banco Ejemplo</h1>
+    </header>
+    <div class="filters">
+        <label>Período:
+            <select id="periodo"></select>
+        </label>
+        <label>Clase:
+            <select id="clase">
+                <option value="Todas">Todas</option>
+                <option value="Eficiencia Operativa">Eficiencia</option>
+                <option value="Calidad de Proceso">Calidad</option>
+                <option value="Experiencia del Cliente">Experiencia</option>
+            </select>
+        </label>
+        <label>Sucursal:
+            <select id="sucursal"></select>
+        </label>
+        <label>Oficial:
+            <select id="oficial"></select>
+        </label>
+    </div>
+    <div class="cards" id="cards"></div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Indicador</th>
+                    <th>Unidad</th>
+                    <th>Valor Actual</th>
+                    <th>Valor Budget</th>
+                    <th>Cumplimiento (%)</th>
+                    <th>Proceso</th>
+                    <th>Clase</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-indicadores"></tbody>
+        </table>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
